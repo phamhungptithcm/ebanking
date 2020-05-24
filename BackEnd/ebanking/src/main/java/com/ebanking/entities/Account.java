@@ -44,10 +44,14 @@ public class Account {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CARD_ID", nullable = false)
-	private IdCard idCard;
+	private CMND idCard;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "account")
 	private List<Card> cards;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ROLE_ID", nullable = false)
+	private Role role;
 
 	public String getId() {
 		return id;
@@ -113,11 +117,11 @@ public class Account {
 		this.email = email;
 	}
 
-	public IdCard getIdCard() {
+	public CMND getIdCard() {
 		return idCard;
 	}
 
-	public void setIdCard(IdCard idCard) {
+	public void setIdCard(CMND idCard) {
 		this.idCard = idCard;
 	}
 
@@ -127,6 +131,14 @@ public class Account {
 
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	

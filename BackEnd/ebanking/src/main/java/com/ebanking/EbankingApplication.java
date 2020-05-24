@@ -8,9 +8,10 @@ public class EbankingApplication {
 
 	public static void main(String[] args) {
 		long  startTime = System.currentTimeMillis();
+		
 		SpringApplication.run(EbankingApplication.class, args);
 		long  endTime = System.currentTimeMillis();
-		System.out.println("System started in " + (endTime -startTime) +" seconds");
+		System.out.println("System started in " + (endTime -startTime)/1000 +" seconds");
 	}
 	
 }

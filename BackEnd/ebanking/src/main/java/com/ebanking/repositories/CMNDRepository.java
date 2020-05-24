@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.ebanking.entities.Account;
 
 @Repository
-public interface AccountRepository extends JpaRepository<Account, String>{
+public interface CMNDRepository extends JpaRepository<Account, String>{
 
 }

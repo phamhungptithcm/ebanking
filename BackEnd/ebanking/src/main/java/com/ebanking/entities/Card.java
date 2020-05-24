@@ -1,12 +1,14 @@
 package com.ebanking.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 // Lưu thông tin thẻ atm
@@ -45,6 +47,9 @@ public class Card {
 	@ManyToOne
 	@JoinColumn(name="BRANCH_ID")
 	private Branch branch;
+	
+	@OneToMany(mappedBy = "card")
+	private List<Transaction> transactions;
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -116,6 +121,14 @@ public class Card {
 
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	
 	

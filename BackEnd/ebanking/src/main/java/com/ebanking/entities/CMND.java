@@ -13,8 +13,8 @@ import javax.persistence.Table;
 
 // Lưu thông tin chứng minh nhân dân đăng kí làm thẻ
 @Entity
-@Table(name = "IDCARD")
-public class IdCard {
+@Table(name = "CMND")
+public class CMND {
 	
 	@Id
 	@Column(name = "ID")
