@@ -42,7 +42,7 @@ public class AccountService implements IAccountService {
 			if (request.getPassword().equals(account.getPassword())) {
 				response.setStatusRequest(true);
 				response.setMessageStatus(LOGIN_SUCCESS);
-				response.setJsonResponse(objectMapper.writeValueAsString(request));
+				response.setJsonResponse(request);
 
 				// set to session
 				session.setAttribute("currentUser", request);
@@ -85,7 +85,7 @@ public class AccountService implements IAccountService {
 
 			response.setStatusRequest(true);
 			response.setMessageStatus(COMMON_MESSAGE_SUCCESS);
-			response.setJsonResponse(objectMapper.writeValueAsString(request));
+			response.setJsonResponse(request);
 
 			logger.info("Request getAccountInfo  status >>> Done");
 		} else {

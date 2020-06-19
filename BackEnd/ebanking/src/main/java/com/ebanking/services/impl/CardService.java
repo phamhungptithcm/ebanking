@@ -198,13 +198,13 @@ public class CardService implements ICardService {
 			}
 			response.setStatusRequest(true);
 			response.setMessageStatus("Success");
-			response.setJsonResponse(objectMapper.writeValueAsString(cardDTOs));
+			response.setJsonResponse(cardDTOs);
 		} catch (Exception e) {
 			response.setStatusRequest(false);
 			response.setMessageStatus("Fail >>> " + e.getMessage());
 			logger.error("Reqest get card info has error >>> " + e.getMessage(), e);
 		}
-		return null;
+		return response;
 	}
 
 }
