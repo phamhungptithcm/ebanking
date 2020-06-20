@@ -1,1 +1,101 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
+.mat-drawer-container { background: #ebebfa ;}
+@media (max-width: 544px) {
+    mat-card {
+      max-width: 250px;
+      margin: 0.5em auto;
+      text-align: center;
+      padding: 0.5em;
+    }
+   
+  }
+  @media (min-width: 544px) and (max-width: 768px) {
+    mat-card {
+      max-width: 450px;
+      margin: 0.5em auto;
+      text-align: center;
+      padding: 1em; 
+    }
+  }
+@media (min-width: 768px) and (max-width: 992px) {
+  mat-card {
+    max-width: 550px;
+    margin: 1em auto;
+    text-align: center;
+    padding: 2em;
+  }
+  .fixed-header {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+  }
+  .main-container {
+      margin-top: 70px;
+      overflow: hidden;
+  }
+  .fixed-footer {
+    position: fixed;
+    bottom: 0px;
+    z-index: 2;
+  }
+  .eb-span-space{ 
+    width: 250px;
+    background-color: #7b35bb;
+  }
+  
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  mat-card {
+    max-width: 650px;
+    margin: 2em auto;
+    text-align: center;
+    padding: 3em;
+  }
+  .fixed-header {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+  }
+  .main-container {
+      margin-top: 70px;
+      overflow: hidden;
+  }
+  .fixed-footer {
+    position: fixed;
+    bottom: 0px;
+    z-index: 2;
+  }
+  .eb-span-space{ 
+    width: 250px;
+    background-color: #7b35bb;
+  }
+}
+
+@media (min-width: 1200px) { 
+  mat-card {
+    max-width: 700px;
+    margin: 2em auto;
+    text-align: center;
+    padding: 3em;
+  }
+  .fixed-header {
+    position: fixed;
+    top: 0px;
+    z-index: 2;
+  }
+  .main-container {
+      margin-top: 70px;
+      overflow: hidden;
+  }
+  .fixed-footer {
+    position: fixed;
+    bottom: 0px;
+    z-index: 2;
+    
+  }
+}
+

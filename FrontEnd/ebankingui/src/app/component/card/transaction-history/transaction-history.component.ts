@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PerfectScrollbarConfigInterface,
+  PerfectScrollbarComponent, PerfectScrollbarDirective } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-transaction-history',
@@ -8,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class TransactionHistoryComponent implements OnInit {
 
   constructor() { }
+  public config: PerfectScrollbarConfigInterface = {};
 
   ngOnInit() {
   }

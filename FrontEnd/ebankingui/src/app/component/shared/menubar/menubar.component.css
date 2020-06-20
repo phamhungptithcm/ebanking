@@ -1,0 +1,23 @@
+
+.fixed-header {
+    background-color: #7b35bb;
+    color: #ebebfa;
+}
+mat-drawer {
+    width: 200px;
+    background-color: #7b35bb;
+    padding-top: 50px;
+}
+.mat-list-base .mat-list-item {
+    color: #ebebfa;
+    font-size: 14px;
+}
+.eb-account-info-title{
+    color: #ad8ad8;
+    font-size: 14px;
+    width: 100%;
+}
+.eb-account-info-subtitle{
+    color: #42236a;
+    font-size: 16px;
+}

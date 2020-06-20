@@ -1,0 +1,56 @@
+<div class="uk-container">
+    <div class="uk-container uk-container-small uk-margin-top">
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">
+            <ul class="uk-slider-items uk-grid">
+                <li class="uk-width-3-4">
+                    <div class="uk-panel">
+                        <div class="uk-card uk-card-default uk-card-body" style="color: #42236a;">
+                            <div><span class="eb-account-info-subtitle">PHAM HUNG</span></div>
+                            <div><span class="eb-account-info-title">0236 0148 101</span></div>
+                            <div style="width: 100%">
+                                <span class="eb-account-info-subtitle">20,036,607 VND </span><span class="fa fa-eye-slash" aria-hidden="true" style="color: #f58220;"></span>
+                                <a uk-icon="icon: chevron-right" style="color: #f58220;float: right;" (click)="onClick('card_detail')">Detail </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="uk-width-3-4">
+                    <div class="uk-panel">
+                        <div class="uk-card uk-card-default uk-card-body" style="color: #42236a;">
+                            <div><span class="eb-account-info-subtitle">PHAM HUNG</span></div>
+                            <div><span class="eb-account-info-title">0236 0148 101</span></div>
+                            <div style="width: 100%">
+                                <span class="eb-account-info-subtitle">20,036,607 VND </span><span class="fa fa-eye-slash" aria-hidden="true" style="color: #f58220;"></span>
+                                <a uk-icon="icon: chevron-right" style="color: #f58220;float: right;" (click)="onClick('card_detail')">Detail </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="uk-width-3-4">
+                    <div class="uk-panel">
+                        <div class="uk-card uk-card-default uk-card-body" style="color: #42236a;">
+                            <div><span class="eb-account-info-subtitle">PHAM HUNG</span></div>
+                            <div><span class="eb-account-info-title">0236 0148 101</span></div>
+                            <div style="width: 100%">
+                                <span class="eb-account-info-subtitle">20,036,607 VND </span><span class="fa fa-eye-slash" aria-hidden="true" style="color: #f58220;"></span>
+                                <a uk-icon="icon: chevron-right" style="color: #f58220;float: right;" (click)="onClick('card_detail')">Detail </a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous" style="color: #f58220;"></a>
+            <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next" style="color: #f58220;"></a>
+
+        </div>
+    </div>
+    <div class="uk-child-width-expand@s uk-text-center uk-margin-top" uk-grid>
+        <div *ngFor="let member of members">
+            <div class="uk-card uk-card-default uk-card-body" (click)="onClick(member.action)">
+            <p><mat-icon >{{member.title}}</mat-icon></p>
+                    <p>{{member.subtitle}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+
+<div class="uk-container">
+    <a><span class="fa fa-angle-left" style="color: #f58220;" aria-hidden="true"></span> <span style="color: #42236a;"> Back</span></a>
+    <h3 style="color: #42236a;font-weight: bold;">Money Transfer In TPBank</h3>
+    <div class="uk-text-center uk-margin-top">
+        <h3 style="color: #42236a;font-weight: bold;">Enter The eToken Code</h3>
+        <div class="eb-account-info-title">Please enter the OTP code sent via your phone here.</div>
+        <form class="verify-form uk-margin-top">
+            <mat-form-field class="verify-form-field">
+                <mat-label>eToken Code</mat-label>
+                <input matInput placeholder="907281" >
+            </mat-form-field>
+         </form>
+         <div class="uk-text-center uk-margin-top">
+             <span>If you haven't received OTP Code? </span><a style="color: #f58220;"><span class="fa fa-repeat" aria-hidden="true"></span><span> Resend.</span></a>
+         </div>
+         <div class="uk-text-center uk-margin-top">
+            <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;" (click)="onClick()">Verify</button>
+        </div>
+    </div>
+</div>
