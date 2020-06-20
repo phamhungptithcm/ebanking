@@ -2,7 +2,7 @@ package com.ebanking.dto;
 
 public class JsonMessageDTO {
 	private boolean statusRequest;
-	private String jsonResponse;
+	private Object jsonResponse;
 	private String messageStatus;
 	
 	public boolean isStatusRequest() {
@@ -11,10 +11,10 @@ public class JsonMessageDTO {
 	public void setStatusRequest(boolean statusRequest) {
 		this.statusRequest = statusRequest;
 	}
-	public String getJsonResponse() {
+	public Object getJsonResponse() {
 		return jsonResponse;
 	}
-	public void setJsonResponse(String jsonResponse) {
+	public void setJsonResponse(Object jsonResponse) {
 		this.jsonResponse = jsonResponse;
 	}
 	public String getMessageStatus() {

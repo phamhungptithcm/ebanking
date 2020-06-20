@@ -66,7 +66,7 @@ public class CardService implements ICardService {
 
 				response.setStatusRequest(true);
 				response.setMessageStatus("Success");
-				response.setJsonResponse(objectMapper.writeValueAsString(cardDTO));
+				response.setJsonResponse(cardDTO);
 			}
 		} catch (Exception e) {
 			response.setStatusRequest(false);
@@ -93,7 +93,7 @@ public class CardService implements ICardService {
 
 				response.setStatusRequest(true);
 				response.setMessageStatus("Success");
-				response.setJsonResponse(objectMapper.writeValueAsString(historyDTO));
+				response.setJsonResponse(historyDTO);
 			}
 		} catch (Exception e) {
 			response.setStatusRequest(false);
@@ -143,11 +143,11 @@ public class CardService implements ICardService {
 
 					response.setStatusRequest(true);
 					response.setMessageStatus("Success");
-					response.setJsonResponse(objectMapper.writeValueAsString(transferDTO));
+					response.setJsonResponse(transferDTO);
 				} else {
 					response.setStatusRequest(false);
 					response.setMessageStatus("Balance in the account is not enough");
-					response.setJsonResponse(objectMapper.writeValueAsString(transferDTO));
+					response.setJsonResponse(transferDTO);
 
 					transaction.setTransactionDescription("Account Balance is not enough.");
 					transaction.setTransactionStatus(false);
@@ -198,7 +198,7 @@ public class CardService implements ICardService {
 			}
 			response.setStatusRequest(true);
 			response.setMessageStatus("Success");
-			response.setJsonResponse(objectMapper.writeValueAsString(cardDTOs));
+			response.setJsonResponse(cardDTOs);
 		} catch (Exception e) {
 			response.setStatusRequest(false);
 			response.setMessageStatus("Fail >>> " + e.getMessage());
