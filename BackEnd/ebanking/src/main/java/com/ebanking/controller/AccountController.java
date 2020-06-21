@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ebanking.dto.AccountDTO;
+import com.ebanking.dto.AccountRequestDTO;
 import com.ebanking.dto.JsonMessageDTO;
+import com.ebanking.helper.Mailer;
 import com.ebanking.services.IAccountService;
 
 import io.swagger.annotations.Api;
@@ -23,12 +24,15 @@ import io.swagger.annotations.Api;
 public class AccountController extends HelperController {
 
 	private Logger logger = LoggerFactory.getLogger(AccountController.class);
+	
+	@Autowired
+	Mailer mailer;
 
 	@Autowired
 	private IAccountService accountService;
 
 	@PostMapping(value = "accountService/login")
-	public ResponseEntity<?> login(@RequestBody AccountDTO request) {
+	public ResponseEntity<?> login(@RequestBody AccountRequestDTO request) {
 		JsonMessageDTO response = null;
 		try {
 			response = accountService.login(request, session);
@@ -51,7 +55,7 @@ public class AccountController extends HelperController {
 	}
 	
 	@PostMapping(value = "accountService/getAccountInfo")
-	public ResponseEntity<?> getAccountInfo(@RequestBody AccountDTO request) {
+	public ResponseEntity<?> getAccountInfo(@RequestBody AccountRequestDTO request) {
 		JsonMessageDTO response = null;
 		try {
 			response = accountService.getAccountInfo(request);
@@ -60,5 +64,16 @@ public class AccountController extends HelperController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 		return ResponseEntity.ok(response);
-	}	
+	}
+	@PostMapping("accountService/forgot")
+	public ResponseEntity<?> forgot(@RequestBody AccountRequestDTO request) {
+		JsonMessageDTO response = null;
+		try {
+			response = accountService.forgotPassword(request);
+		} catch (Exception e) {
+			logger.error("getAccountInfo has error >>> " + e.getMessage(), e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+		return ResponseEntity.ok(response);
+	}
 }

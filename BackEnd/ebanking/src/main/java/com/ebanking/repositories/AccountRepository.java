@@ -7,5 +7,5 @@ import com.ebanking.entities.Account;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, String>{
-
+	
 }

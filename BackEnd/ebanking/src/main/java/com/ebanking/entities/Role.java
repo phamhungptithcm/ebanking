@@ -14,7 +14,7 @@ public class Role {
 
 	@Id
 	@Column(name = "ROLE_ID")
-	private String roleId;
+	private int roleId;
 
 	@Column(name = "ROLE_NAME")
 	private String roleName;
@@ -25,11 +25,11 @@ public class Role {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
 	private Account account;
 
-	public String getRoleId() {
+	public int getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(int roleId) {
 		this.roleId = roleId;
 	}
 

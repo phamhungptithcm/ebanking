@@ -2,9 +2,7 @@ package com.ebanking.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-
-public class TransactionHistoryDTO {
+public class TransactionHistoryResponseDTO {
 	
 	private String transactionId;
 	

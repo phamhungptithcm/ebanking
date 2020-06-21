@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 import com.ebanking.dto.BranchDTO;
 import com.ebanking.dto.CardDTO;
 import com.ebanking.dto.JsonMessageDTO;
-import com.ebanking.dto.TransactionHistoryDTO;
+import com.ebanking.dto.OTPRequestDTO;
+import com.ebanking.dto.TransactionHistoryResponseDTO;
+import com.ebanking.dto.TransactionRequestDTO;
 import com.ebanking.dto.TransferDTO;
 import com.ebanking.entities.Branch;
 import com.ebanking.entities.Card;
@@ -77,13 +79,13 @@ public class CardService implements ICardService {
 	}
 
 	@Override
-	public JsonMessageDTO getTransactionHistory(CardDTO request) throws Exception {
+	public JsonMessageDTO getTransactionHistory(TransactionRequestDTO request) throws Exception {
 		JsonMessageDTO response = new JsonMessageDTO();
 		try {
 			Transaction transaction = transactionRepository
 					.findByCardAccountNumberOrderByTransactionDateDesc(request.getCardNumber());
 			if (transaction != null) {
-				TransactionHistoryDTO historyDTO = new TransactionHistoryDTO();
+				TransactionHistoryResponseDTO historyDTO = new TransactionHistoryResponseDTO();
 
 				historyDTO.setTransactionDate(transaction.getTransactionDate());
 				historyDTO.setTransactionDescription(transaction.getTransactionDescription());
@@ -112,7 +114,6 @@ public class CardService implements ICardService {
 			Card transfer = cardRepository.findById(request.getCardNumberTransfer()).get();
 			if (receiver != null && transfer != null) {
 				Transaction transaction = new Transaction();
-
 				transaction.setCard(transfer);
 				transaction.setCardFrom(transfer.getAccountNumber());
 				transaction.setCardTo(receiver.getAccountNumber());
@@ -204,6 +205,30 @@ public class CardService implements ICardService {
 			response.setMessageStatus("Fail >>> " + e.getMessage());
 			logger.error("Reqest get card info has error >>> " + e.getMessage(), e);
 		}
+		return null;
+	}
+
+	@Override
+	public JsonMessageDTO sendSMS(OTPRequestDTO request) throws Exception {
+		
+		return null;
+	}
+
+	@Override
+	public JsonMessageDTO sendMail(OTPRequestDTO request) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JsonMessageDTO downloadTransactionHistory() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JsonMessageDTO verifyCode(OTPRequestDTO request) throws Exception {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
