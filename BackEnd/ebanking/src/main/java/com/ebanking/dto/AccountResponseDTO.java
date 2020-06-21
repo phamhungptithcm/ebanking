@@ -1,7 +1,8 @@
 package com.ebanking.dto;
 
 public class AccountResponseDTO {
-
+	
+	private String accountId;
 	private String lastName;
 	private String firstName;
 	private String address;
@@ -66,4 +67,12 @@ public class AccountResponseDTO {
 		this.email = email;
 	}
 
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+	
 }

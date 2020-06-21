@@ -13,7 +13,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
 	
 	static final String CLIENT_ID = "ebanking"; // Name of Resource owner
-	static final String CLIENT_SECRET = "$2a$10$1S5I.Bwi.mC6772UXHmGbuRJg07zWieGjsFsrZfirx48C97EkUztG"; // Password of Resource owner = 1
+	static final String CLIENT_SECRET = "$2a$10$v7.tOvbj1emw40gsIiZv/.AclS9GdnK/wQqwLjuGBtWsJCXRbmkqS"; // Password of Resource owner = 1
 	static final String GRANT_TYPE_PASSWORD = "password"; // Type you want to access
 	static final String AUTHORIZATION_CODE = "authorization_code";
     static final String REFRESH_TOKEN = "refresh_token";
@@ -21,8 +21,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	static final String SCOPE_READ = "read";
 	static final String SCOPE_WRITE = "write";
     static final String TRUST = "trust";
-	static final int ACCESS_TOKEN_VALIDITY_SECONDS = 5*60;
-    static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 10*60;
+	static final int ACCESS_TOKEN_VALIDITY_SECONDS = 60*60;
+    static final int FREFRESH_TOKEN_VALIDITY_SECONDS = 24*60*60;
 	
 	@Autowired
 	private TokenStore tokenStore;

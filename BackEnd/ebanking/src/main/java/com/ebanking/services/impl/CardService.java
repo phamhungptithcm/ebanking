@@ -205,7 +205,7 @@ public class CardService implements ICardService {
 			response.setMessageStatus("Fail >>> " + e.getMessage());
 			logger.error("Reqest get card info has error >>> " + e.getMessage(), e);
 		}
-		return null;
+		return response;
 	}
 
 	@Override

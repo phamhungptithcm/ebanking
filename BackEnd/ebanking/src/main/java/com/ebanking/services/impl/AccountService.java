@@ -80,7 +80,7 @@ public class AccountService implements IAccountService, UserDetailsService  {
 			cmndDTO.setDateGranted(account.getIdCard().getDateGranted());
 			cmndDTO.setDateOfBirth(account.getIdCard().getDateOfBirth());
 			cmndDTO.setPlaceGranted(account.getIdCard().getPlaceGranted());
-
+			dto.setAccountId(account.getId());
 			dto.setFirstName(account.getFirstName());
 			dto.setLastName(account.getLastName());
 			dto.setAddress(account.getAddress());
@@ -91,7 +91,7 @@ public class AccountService implements IAccountService, UserDetailsService  {
 
 			response.setStatusRequest(true);
 			response.setMessageStatus(COMMON_MESSAGE_SUCCESS);
-			response.setJsonResponse(request);
+			response.setJsonResponse(dto);
 
 			logger.info("Request getAccountInfo  status >>> Done");
 		} else {
