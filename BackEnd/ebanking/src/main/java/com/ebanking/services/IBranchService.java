@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.ebanking.dto.BranchWrapper;
+import com.ebanking.entities.Branch;
 
 @Service
 public interface IBranchService {
@@ -12,7 +13,7 @@ public interface IBranchService {
 
 	public BranchWrapper getBranchById(String branchId);
 
-	public boolean createBranch(BranchWrapper branchWrapper);
+	public Branch createBranch(BranchWrapper branchWrapper);
 
 	public boolean updateBranch(BranchWrapper branchWrapper);
 

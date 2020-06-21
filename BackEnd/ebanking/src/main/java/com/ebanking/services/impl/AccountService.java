@@ -2,6 +2,7 @@ package com.ebanking.services.impl;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -15,12 +16,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import com.ebanking.dto.AccountCreationWrapper;
 import com.ebanking.dto.AccountRequestDTO;
 import com.ebanking.dto.AccountResponseDTO;
 import com.ebanking.dto.CMNDDTO;
+import com.ebanking.dto.CMNDWrapper;
 import com.ebanking.dto.JsonMessageDTO;
 import com.ebanking.entities.Account;
+import com.ebanking.entities.CMND;
+import com.ebanking.entities.Role;
 import com.ebanking.repositories.AccountRepository;
+import com.ebanking.repositories.RoleRepository;
 import com.ebanking.services.IAccountService;
 
 @Component
@@ -32,6 +39,12 @@ public class AccountService implements IAccountService, UserDetailsService  {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private CMNDService cmndService;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	private Logger logger = LoggerFactory.getLogger(AccountService.class);
 
@@ -122,5 +135,40 @@ public class AccountService implements IAccountService, UserDetailsService  {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean createAccount(AccountCreationWrapper accountCreationWrapper) {
+		boolean result = false;
 
+		try {
+
+			CMNDWrapper cmndWrapper = cmndService.getCMNDById(accountCreationWrapper.getCmnd().getId());
+
+			if (cmndWrapper == null || cmndWrapper.getId() == null) {
+				CMND cmnd = cmndService.createCMND(accountCreationWrapper.getCmnd());
+
+				Optional<Role> role = roleRepository.findById(accountCreationWrapper.getRole().getRoleId());
+				if (role.isPresent()) {
+					Account account = new Account();
+					account.setId(accountCreationWrapper.getId());
+					account.setFirstName(accountCreationWrapper.getFirstName());
+					account.setLastName(accountCreationWrapper.getLastName());
+					account.setAddress(accountCreationWrapper.getAddress());
+					account.setCity(accountCreationWrapper.getCity());
+					account.setEmail(accountCreationWrapper.getEmail());
+					account.setPhoneNum(accountCreationWrapper.getPhoneNum());
+					account.setPassword(encrypt.encode(accountCreationWrapper.getPassword()));
+					account.setRole(role.get());
+					account.setIdCard(cmnd);
+
+					account = accountRepository.save(account);
+					result = true;
+				}
+			}
+
+		} catch (Exception e) {
+			logger.error("create account has error >>> " + e.getMessage(), e);
+		}
+		return result;
+	}
 }

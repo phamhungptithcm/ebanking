@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ebanking.dto.RoleDTO;
+import com.ebanking.entities.Role;
 import com.ebanking.services.IRoleService;
 
 import io.swagger.annotations.Api;
@@ -41,8 +42,8 @@ public class RoleController {
 
 	@PostMapping(value = "role-service/roles")
 	public ResponseEntity<?> createRole(@RequestBody RoleDTO roleDTO) {
-		boolean response = roleService.createRole(roleDTO);
-		if (response) {
+		Role response = roleService.createRole(roleDTO);
+		if (response != null) {
 			return ResponseEntity.ok(response);
 
 		}

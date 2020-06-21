@@ -1,11 +1,13 @@
 package com.ebanking.entities;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +24,8 @@ public class Role {
 	@Column(name = "ACTIVE")
 	private Boolean active;
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
-	private Account account;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "role")
+	private List<Account> account;
 
 	public String getRoleId() {
 		return roleId;
@@ -49,11 +51,11 @@ public class Role {
 		this.active = active;
 	}
 
-	public Account getAccount() {
+	public List<Account> getAccount() {
 		return account;
 	}
 
-	public void setAccount(Account account) {
+	public void setAccount(List<Account> account) {
 		this.account = account;
 	}
 

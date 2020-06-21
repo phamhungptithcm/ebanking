@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ebanking.dto.AccountCreationWrapper;
 import com.ebanking.dto.AccountRequestDTO;
 import com.ebanking.dto.JsonMessageDTO;
+import com.ebanking.entities.Account;
 import com.ebanking.helper.Mailer;
 import com.ebanking.services.IAccountService;
 
@@ -75,5 +77,14 @@ public class AccountController extends HelperController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 		return ResponseEntity.ok(response);
+	}
+	
+	@PostMapping("accountService/create")
+	public ResponseEntity<?> createAccount(@RequestBody AccountCreationWrapper accountCreationWrapper) {
+			boolean response = accountService.createAccount(accountCreationWrapper);
+			if (response) {
+				return ResponseEntity.ok(response);
+		}
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 	}
 }

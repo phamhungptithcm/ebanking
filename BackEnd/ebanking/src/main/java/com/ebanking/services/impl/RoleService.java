@@ -61,20 +61,19 @@ public class RoleService implements IRoleService {
 	}
 
 	@Override
-	public boolean createRole(RoleDTO roleDTO) {
-		boolean response = false;
+	public Role createRole(RoleDTO roleDTO) {
+		Role role = new Role();
 		try {
-			Role role = new Role();
+			
 			role.setRoleId(roleDTO.getRoleId());
 			role.setActive(roleDTO.getActive());
 			role.setRoleName(roleDTO.getRoleName());
 
-			roleRepository.save(role);
-			response = true;
+			role = roleRepository.save(role);
 		} catch (Exception e) {
 			logger.error("Create role has error >>> " + e.getMessage(), e);
 		}
-		return response;
+		return role;
 	}
 
 	@Override

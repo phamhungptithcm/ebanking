@@ -4,8 +4,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.ebanking.dto.AccountCreationWrapper;
 import com.ebanking.dto.AccountRequestDTO;
 import com.ebanking.dto.JsonMessageDTO;
+import com.ebanking.entities.Account;
 
 @Service
 public interface IAccountService {
@@ -16,4 +18,6 @@ public interface IAccountService {
 	public JsonMessageDTO getAccountInfo(AccountRequestDTO request) throws Exception;
 
 	public JsonMessageDTO forgotPassword(AccountRequestDTO request)  throws Exception;
+	
+	public boolean createAccount(AccountCreationWrapper accountCreationWrapper);
 }
