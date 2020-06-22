@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ebanking.dto.BranchWrapper;
+import com.ebanking.entities.Branch;
 import com.ebanking.services.IBranchService;
 
 import io.swagger.annotations.Api;
@@ -41,8 +42,8 @@ public class BranchController {
 
 	@PostMapping(value = "branch-service/branchs")
 	public ResponseEntity<?> createbranch(@RequestBody BranchWrapper branchwrapper) {
-		boolean response = branchService.createBranch(branchwrapper);
-		if (response) {
+		Branch response = branchService.createBranch(branchwrapper);
+		if (response != null && response.getId() != null) {
 			return ResponseEntity.ok(response);
 
 		}

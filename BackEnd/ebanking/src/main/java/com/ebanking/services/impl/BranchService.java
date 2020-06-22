@@ -61,21 +61,19 @@ public class BranchService implements IBranchService {
 	}
 
 	@Override
-	public boolean createBranch(BranchWrapper branchWrapper) {
-		boolean response = false;
+	public Branch createBranch(BranchWrapper branchWrapper) {
+		Branch branch = new Branch();
 		try {
-			Branch branch = new Branch();
 			branch.setId(branchWrapper.getId());
 			branch.setBranchName(branchWrapper.getBranchName());
 			branch.setContactNumber(branchWrapper.getContactNumber());
 			branch.setPlaceGranted(branchWrapper.getPlaceGranted());
 
-			branchRepository.save(branch);
-			response = true;
+			branch = branchRepository.save(branch);
 		} catch (Exception e) {
 			logger.error("Create role has error >>> " + e.getMessage(), e);
 		}
-		return response;
+		return branch;
 	}
 
 	@Override

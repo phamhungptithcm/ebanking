@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ebanking.dto.CMNDWrapper;
+import com.ebanking.entities.CMND;
 import com.ebanking.services.ICMNDService;
 
 import io.swagger.annotations.Api;
@@ -41,8 +42,8 @@ public class CMNDController {
 
 	@PostMapping(value = "cmnd-service/cmnd")
 	public ResponseEntity<?> createCMND(@RequestBody CMNDWrapper cmndWrapper) {
-		boolean response = cmndService.createCMND(cmndWrapper);
-		if (response) {
+		CMND response = cmndService.createCMND(cmndWrapper);
+		if (response != null && response.getId() != null) {
 			return ResponseEntity.ok(response);
 
 		}

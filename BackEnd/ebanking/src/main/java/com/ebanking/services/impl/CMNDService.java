@@ -61,22 +61,20 @@ public class CMNDService implements ICMNDService {
 	}
 
 	@Override
-	public boolean createCMND(CMNDWrapper cmndWrapper) {
-		boolean response = false;
+	public CMND createCMND(CMNDWrapper cmndWrapper) {
+		CMND cmnd = new CMND();
 		try {
-			CMND cmnd = new CMND();
 			cmnd.setId(cmndWrapper.getId());
 			cmnd.setDateGranted(cmndWrapper.getDateGranted());
 			cmnd.setPlaceGranted(cmndWrapper.getPlaceGranted());
 			cmnd.setFullname(cmndWrapper.getFullname());
 			cmnd.setDateOfBirth(cmndWrapper.getDateOfBirth());
 
-			cmndRepository.save(cmnd);
-			response = true;
+			cmnd = cmndRepository.save(cmnd);
 		} catch (Exception e) {
 			logger.error("Create cmnd has error >>> " + e.getMessage(), e);
 		}
-		return response;
+		return cmnd;
 	}
 
 	@Override
