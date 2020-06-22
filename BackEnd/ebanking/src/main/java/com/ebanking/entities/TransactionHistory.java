@@ -39,10 +39,6 @@ public class TransactionHistory {
 	@Column(name ="TRANSACTION_AMOUT")
 	private Double transactionAmount;
 	
-	@ManyToOne
-	@JoinColumn(name="CARD_ID")
-	private Card card;
-
 	public String getTransactionId() {
 		return transactionId;
 	}
@@ -81,14 +77,6 @@ public class TransactionHistory {
 
 	public void setTransactionStatus(Boolean transactionStatus) {
 		this.transactionStatus = transactionStatus;
-	}
-
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
 	}
 
 	public String getCardFrom() {

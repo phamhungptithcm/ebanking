@@ -1,5 +1,6 @@
 package com.ebanking.services.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -89,20 +90,27 @@ public class CardService implements ICardService {
 	public JsonMessageDTO getTransactionHistory(TransactionRequestDTO request) throws Exception {
 		JsonMessageDTO response = new JsonMessageDTO();
 		try {
-			TransactionHistory transaction = transactionRepository
-					.findByCardAccountNumberOrderByTransactionDateDesc(request.getCardNumber());
-			if (transaction != null) {
-				TransactionHistoryResponseDTO historyDTO = new TransactionHistoryResponseDTO();
-
-				historyDTO.setTransactionDate(transaction.getTransactionDate());
-				historyDTO.setTransactionDescription(transaction.getTransactionDescription());
-				historyDTO.setTransactionId(transaction.getTransactionId());
-				historyDTO.setTransactionMessage(transaction.getTransactionMessage());
-				historyDTO.setTransactionStatus(transaction.getTransactionStatus());
-
+			List<TransactionHistory> transactions = transactionRepository.findByCardFromOrCardToOrderByTransactionDateDesc(request.getCardNumber(),request.getCardNumber());
+			if (transactions != null) {
+				List<TransactionHistoryResponseDTO> historyDTOs = new ArrayList<>();
+				for (TransactionHistory transaction : transactions) {
+					TransactionHistoryResponseDTO historyDTO = new TransactionHistoryResponseDTO();
+					Date date = transaction.getTransactionDate();
+					historyDTO.setTransactionDate(date);
+					historyDTO.setTransactionDescription(transaction.getTransactionDescription());
+					historyDTO.setTransactionId(transaction.getTransactionId());
+					historyDTO.setTransactionMessage(transaction.getTransactionMessage());
+					historyDTO.setTransactionStatus(transaction.getTransactionStatus());
+					historyDTO.setAmount(transaction.getTransactionAmount());
+					historyDTO.setDayOfWeek(this.formartDate(date,"E"));
+					historyDTO.setDayOfMonth(this.formartDate(date, "dd"));
+					historyDTO.setDate(this.formartDate(date, "M y"));
+					
+					historyDTOs.add(historyDTO);
+				}
 				response.setStatusRequest(true);
 				response.setMessageStatus("Success");
-				response.setJsonResponse(historyDTO);
+				response.setJsonResponse(historyDTOs);
 			}
 		} catch (Exception e) {
 			response.setStatusRequest(false);
@@ -121,7 +129,6 @@ public class CardService implements ICardService {
 			Card transfer = cardRepository.findById(request.getCardNumberTransfer()).get();
 			if (receiver != null && transfer != null) {
 				TransactionHistory transaction = new TransactionHistory();
-				transaction.setCard(transfer);
 				transaction.setCardFrom(transfer.getAccountNumber());
 				transaction.setCardTo(receiver.getAccountNumber());
 				transaction.setTransactionDate(new Date());
@@ -257,6 +264,11 @@ public class CardService implements ICardService {
 		response.setMessageStatus("Successfully");
 		response.setJsonResponse(true);
 		return response;
+	}
+	private String formartDate(Date value,String formatStr) throws Exception{
+		SimpleDateFormat formatter = new SimpleDateFormat(formatStr);
+        
+        return formatter.format(value);
 	}
 
 }

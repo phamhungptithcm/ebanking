@@ -13,6 +13,36 @@ public class TransactionHistoryResponseDTO {
 	private String transactionMessage;
 	
 	private Boolean transactionStatus;
+	
+	private Double amount;
+	private String dayOfWeek;
+	private String dayOfMonth;
+	private String date;
+	
+	
+	public String getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public void setDayOfWeek(String dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+
+	public String getDayOfMonth() {
+		return dayOfMonth;
+	}
+
+	public void setDayOfMonth(String dayOfMonth) {
+		this.dayOfMonth = dayOfMonth;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 	public String getTransactionId() {
 		return transactionId;
@@ -52,6 +82,14 @@ public class TransactionHistoryResponseDTO {
 
 	public void setTransactionStatus(Boolean transactionStatus) {
 		this.transactionStatus = transactionStatus;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 	
 	

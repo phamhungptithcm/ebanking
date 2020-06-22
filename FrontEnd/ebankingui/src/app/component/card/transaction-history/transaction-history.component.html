@@ -11,7 +11,7 @@
                     <p class="eb-account-info-title">Account Number</p>
                     <p class="eb-account-info-subtitle">{{card.cardNumber}}</p>
                     <p class="eb-account-info-title">Available Balance</p>
-                    <p class="eb-account-info-balance">{{card.availableBalance}}</p>
+                    <p class="eb-account-info-balance">{{card.availableBalance}} VND</p>
                 </div>
             </div>
         </div>
@@ -57,12 +57,12 @@
                                     <tr>
                                         <td style="width: 50px">
                                             <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">{{item.day}}</span>
+                                                <span style="font-size:25px;">{{item.dayOfMonth}}</span>
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle;">
                                             <div class="eb-account-info-title">{{item.dayOfWeek}}</div>
-                                            <div class="eb-account-info-title">{{item.month}} {{item.year}}</div>
+                                            <div class="eb-account-info-title">{{item.date}}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -88,7 +88,7 @@
             </div>
         </div>
             <div class="uk-margin-top uk-text-right">
-                <a href="" style="color:#f58220;"><span class="fa fa-download" aria-hidden="true"></span> Dowload Transaction History</a>
+                <a (click)="onClickDownload()" style="color:#f58220;"><span class="fa fa-download" aria-hidden="true"></span> Dowload Transaction History</a>
             </div>
         </div>
     </div>

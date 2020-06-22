@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit() {
     // this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/game';
-
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -65,6 +64,7 @@ export class LoginComponent implements OnInit {
               this.authService.saveToken('refresh_token', data.refresh_token);
               this.authService.saveToken('expires_in', data.expires_in);
            });
+           this.loginInvalid = true;
             this.subjectService.logged();
             sessionStorage.setItem('user', JSON.stringify(this.curUser));
             this.form.reset();
@@ -83,5 +83,18 @@ export class LoginComponent implements OnInit {
         this.loginInvalid = true;
       }
     });
+  }
+  async forgotPassword(){
+    this.router.navigate(['/forgotPassword'])
+    // const request  = new  LoginRequestDTO(,'');
+    // await this.accountService.getAccountInfo(request).then(
+    //   data => {
+    //     this.jsonMessageResponseDTO = data
+    //     if (data !== null) {
+    //         if (data.jsonResponse != '' && data.jsonResponse != undefined) {
+    //          this.accountResponseDTO = data.jsonResponse;
+    //         }
+    //     }
+    //   });
   }
 }

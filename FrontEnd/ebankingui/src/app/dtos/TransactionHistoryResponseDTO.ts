@@ -10,4 +10,7 @@ export class TransactionHistoryResponseDTO{
 	transactionStatus: boolean;
 
 	amount: number;
+	dayOfWeek: string;
+	dayOfMonth: string;
+	date: string;
 }

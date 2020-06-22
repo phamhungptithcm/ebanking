@@ -48,9 +48,6 @@ public class Card {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="BRANCH_ID")
 	private Branch branch;
-	
-	@OneToMany(mappedBy = "card")
-	private List<TransactionHistory> transactions;
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -124,13 +121,6 @@ public class Card {
 		this.branch = branch;
 	}
 
-	public List<TransactionHistory> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(List<TransactionHistory> transactions) {
-		this.transactions = transactions;
-	}
 	
 	
 }

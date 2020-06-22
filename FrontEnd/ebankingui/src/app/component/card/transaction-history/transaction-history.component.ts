@@ -30,6 +30,7 @@ export class TransactionHistoryComponent implements OnInit {
   ngOnInit() {
     const cardNumber = sessionStorage.getItem('cardNumber');
       this.getCardInfo(cardNumber);
+      this.getTransactionHistory(cardNumber);
   }
   onClickSearch() {
     
