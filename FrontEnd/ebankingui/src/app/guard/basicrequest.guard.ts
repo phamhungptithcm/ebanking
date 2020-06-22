@@ -12,11 +12,11 @@ export class BasicrequestGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      this.user = JSON.parse(sessionStorage.getItem('user'));
-      if (this.user == null || this.user != undefined) {
-        // this.router.navigate['/login'];
-        return true;
-      }
+      // this.user = JSON.parse(sessionStorage.getItem('user'));
+      // if (this.user == null || this.user != undefined) {
+      //   // this.router.navigate(['login']);
+      //   return true;
+      // }
       return true;
     }
 }

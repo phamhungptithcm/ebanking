@@ -186,4 +186,20 @@ public class AccountService implements IAccountService, UserDetailsService  {
 		}
 		return result;
 	}
+
+	@Override
+	public JsonMessageDTO updatePassword(AccountRequestDTO request) {
+		Account user = accountRepository.findById(request.getUsername()).get();
+		JsonMessageDTO response = new JsonMessageDTO();
+		if(user == null) {
+			response.setStatusRequest(false);
+			response.setMessageStatus(COMMON_MESSAGE_FAIL);
+		}
+		user.setPassword(encrypt.encode(request.getPassword()));
+		accountRepository.save(user);
+		response.setStatusRequest(true);
+		response.setMessageStatus(COMMON_MESSAGE_SUCCESS);
+		response.setJsonResponse(request);
+		return response;
+	}
 }

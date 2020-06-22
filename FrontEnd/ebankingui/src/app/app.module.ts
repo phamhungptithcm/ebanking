@@ -38,6 +38,7 @@ import { ConfirmationComponent } from './component/card/confirmation/confirmatio
 import { VerificationComponent } from './component/card/verification/verification.component';
 import { OverviewComponent } from './component/card/overview/overview.component';
 import { UpdatepasswordComponent } from './component/account/updatepassword/updatepassword.component';
+import { ForgotpasswordComponent } from './component/account/forgotpassword/forgotpassword.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
@@ -57,7 +58,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ConfirmationComponent,
     VerificationComponent,
     OverviewComponent,
-    UpdatepasswordComponent
+    UpdatepasswordComponent,
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,

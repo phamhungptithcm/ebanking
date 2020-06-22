@@ -15,8 +15,11 @@ public class TransactionHistoryResponseDTO {
 	private Boolean transactionStatus;
 	
 	private Double amount;
+	
 	private String dayOfWeek;
+	
 	private String dayOfMonth;
+	
 	private String date;
 	
 	

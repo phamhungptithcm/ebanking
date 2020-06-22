@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
               this.authService.saveToken('refresh_token', data.refresh_token);
               this.authService.saveToken('expires_in', data.expires_in);
            });
-           this.loginInvalid = true;
+           this.loginInvalid = false;
             this.subjectService.logged();
             sessionStorage.setItem('user', JSON.stringify(this.curUser));
             this.form.reset();
@@ -86,15 +86,5 @@ export class LoginComponent implements OnInit {
   }
   async forgotPassword(){
     this.router.navigate(['/forgotPassword'])
-    // const request  = new  LoginRequestDTO(,'');
-    // await this.accountService.getAccountInfo(request).then(
-    //   data => {
-    //     this.jsonMessageResponseDTO = data
-    //     if (data !== null) {
-    //         if (data.jsonResponse != '' && data.jsonResponse != undefined) {
-    //          this.accountResponseDTO = data.jsonResponse;
-    //         }
-    //     }
-    //   });
   }
 }

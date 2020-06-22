@@ -38,6 +38,8 @@ export class UpdatepasswordComponent implements OnInit {
   }
   async onSubmit() {
     const oldPassword= this.form.get('oldPassword').value;
+    const newPassword= this.form.get('newPassword').value;
+    const updatePasswordDTO = new LoginRequestDTO(this.curUser.username,newPassword);
     if (this.form.valid) {
       if(this.curUser.password == oldPassword){
         const request = new OTPRequestDTO('','hungpham12344321@gmail.com','');
@@ -46,7 +48,10 @@ export class UpdatepasswordComponent implements OnInit {
             if (data != null) {
                 if (data.jsonResponse != '' && data.jsonResponse != undefined) {
                   this.verifyCode = data.jsonResponse;
+                  sessionStorage.setItem('action','Update Password');
+                  sessionStorage.setItem('user',JSON.stringify(updatePasswordDTO));
                   alert('Send mail successfully')
+                  
                 }
             }
           });

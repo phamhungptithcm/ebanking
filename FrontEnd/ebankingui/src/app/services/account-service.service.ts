@@ -78,5 +78,12 @@ export class AccountService extends WebServicesURL{
     const url = `${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.GET_ACCOUNT_INFO_ACTION_PATH}?${this.TOKEN_PARAM}`;
     return await this.http.post<JsonMessageResponseDTO>(url, request, this.httpOptionsUser).toPromise();
   }
-  
+  async updatePassword(request: LoginRequestDTO): Promise<any>  {
+    const url = `${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.UPDATE_PASSWORD}?${this.TOKEN_PARAM}`;
+    return await this.http.post<JsonMessageResponseDTO>(url, request, this.httpOptionsUser).toPromise();
+  }
+  async forgotPassword(request: LoginRequestDTO): Promise<any>  {
+    const url = `${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.FORGOT_PASSWORD_ACTION_PATH}?${this.TOKEN_PARAM}`;
+    return await this.http.post<JsonMessageResponseDTO>(url, request, this.httpOptionsUser).toPromise();
+  }
 }

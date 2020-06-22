@@ -12,6 +12,7 @@ import { VerificationComponent } from './component/card/verification/verificatio
 import { OverviewComponent } from './component/card/overview/overview.component';
 import { UpdatepasswordComponent } from './component/account/updatepassword/updatepassword.component';
 import { BasicrequestGuard } from './guard/basicrequest.guard';
+import { ForgotpasswordComponent } from './component/account/forgotpassword/forgotpassword.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,14 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotpasswordComponent
+  },
+  {
+    path: 'update_password',
+    component: UpdatepasswordComponent
   },
   {
     path: 'home',

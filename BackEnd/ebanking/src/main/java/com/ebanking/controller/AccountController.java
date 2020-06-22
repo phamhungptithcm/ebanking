@@ -67,6 +67,17 @@ public class AccountController extends HelperController {
 		}
 		return ResponseEntity.ok(response);
 	}
+	@PostMapping(value = "accountService/updatePassword")
+	public ResponseEntity<?> updatePassword(@RequestBody AccountRequestDTO request) {
+		JsonMessageDTO response = null;
+		try {
+			response = accountService.updatePassword(request);
+		} catch (Exception e) {
+			logger.error("getAccountInfo has error >>> " + e.getMessage(), e);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+		return ResponseEntity.ok(response);
+	}
 	@PostMapping("accountService/forgot")
 	public ResponseEntity<?> forgot(@RequestBody AccountRequestDTO request) {
 		JsonMessageDTO response = null;

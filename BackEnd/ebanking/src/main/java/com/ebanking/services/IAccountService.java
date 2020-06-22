@@ -20,4 +20,6 @@ public interface IAccountService {
 	public JsonMessageDTO forgotPassword(AccountRequestDTO request)  throws Exception;
 	
 	public boolean createAccount(AccountCreationWrapper accountCreationWrapper);
+
+	public JsonMessageDTO updatePassword(AccountRequestDTO request);
 }

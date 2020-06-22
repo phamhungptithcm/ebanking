@@ -17,6 +17,7 @@ export class WebServicesURL {
     SEND_MAIL_ACTION_PATH = 'sendMail';
     SEND_TRANSACTION_INFO = 'sendTransactionInfo';
     CHECK_VERIFICATION_CODE = 'verifyCode';
+    UPDATE_PASSWORD = 'updatePassword';
 
     /// Get token
     TOKEN_PARAM = 'access_token=' + localStorage.getItem("access_token");

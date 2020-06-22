@@ -18,16 +18,19 @@ export class VerificationComponent implements OnInit {
 
   constructor(private router: Router, private cardService: CardService
     ,private accountService: AccountService,
-    private fb: FormBuilder,) { }
+    private fb: FormBuilder) { }
     form: FormGroup;
   transferDTO: TransferRequestDTO;
   verifyCode: string;
   curUser: LoginRequestDTO;
   accountResponseDTO: AccountResponseDTO;
-  codeIsValid = false;
+  codeIsValid = true;
   result: TransferRequestDTO;
-
+  action: string;
+  title: string;
   ngOnInit() {
+    this.action = sessionStorage.getItem('action');
+    this.title = this.action != null || this.action != undefined ? this.action : 'Money Transfer In TPBank';
     this.transferDTO = JSON.parse(sessionStorage.getItem('transferDTO'));
     this.form = this.fb.group({
       verifyCode: ['', Validators.required],
@@ -51,6 +54,7 @@ export class VerificationComponent implements OnInit {
             if (data != null) {
                 if (data.jsonResponse != '' && data.jsonResponse != undefined) {
                   this.verifyCode = data.jsonResponse;
+                  sessionStorage.setItem('verifyCodeRoot',this.verifyCode);
                   alert('Send mail successfully')
                 }
             }
@@ -62,11 +66,23 @@ export class VerificationComponent implements OnInit {
        const verifyCode = this.form.get('verifyCode').value;
       await this.checkVerificationCode(verifyCode);
       if(this.codeIsValid){
-        await this.transferMoney();
-        await this.delay(300);
-        sessionStorage.removeItem('transferDTO');
-        
-        this.router.navigate(['summary']);
+        const root = sessionStorage.getItem('verifyCodeRoot');
+        if(root == verifyCode) {
+          if(this.action != null || this.action != undefined) {
+            await this.updatePassword();
+            await this.delay(100);
+            sessionStorage.removeItem('action');
+            this.router.navigate(['home']);
+          } else {
+            await this.transferMoney();
+            await this.delay(300);
+            sessionStorage.removeItem('transferDTO');
+            this.router.navigate(['summary']);
+          }
+        } else {
+          this.codeIsValid = false;
+        }
+       
       }
     }
        
@@ -98,5 +114,18 @@ export class VerificationComponent implements OnInit {
   }
   async delay(ms: number) {
     await new Promise(resolve => setTimeout(()=>resolve(), ms)).then(()=>console.log("fired"));
+  }
+  async updatePassword() {
+    const account = JSON.parse(sessionStorage.getItem('user'));
+    await this.accountService.updatePassword(account).then(
+      data => {
+        if (data != null) {
+            if (data.jsonResponse != '' && data.jsonResponse != undefined) {
+              this.result = data.jsonResponse;
+              sessionStorage.removeItem('updatePasswordDTO');
+            }
+        }
+      });
+    await this.delay(300);
   }
 }

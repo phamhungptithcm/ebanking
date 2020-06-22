@@ -18,7 +18,7 @@ export class AuthGuardService implements CanActivate{
       this.user = JSON.parse(sessionStorage.getItem('user'));
     if (this.user === null) {
       // this.router.navigate(['/']);
-      return true;
+      return false;
     }
     return true;
   }

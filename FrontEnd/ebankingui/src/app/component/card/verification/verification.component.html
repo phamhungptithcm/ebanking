@@ -1,11 +1,14 @@
 
 <div class="uk-container">
     <a><span class="fa fa-angle-left" style="color: #f58220;" aria-hidden="true"></span> <span style="color: #42236a;"> Back</span></a>
-    <h3 style="color: #42236a;font-weight: bold;">Money Transfer In TPBank</h3>
+    <h3 style="color: #42236a;font-weight: bold;">{{title}}</h3>
     <div class="uk-text-center uk-margin-top">
         <h3 style="color: #42236a;font-weight: bold;">Enter The eToken Code</h3>
         <div class="eb-account-info-title">Please enter the OTP code sent via your phone here.</div>
         <form class="verify-form uk-margin-top"  [formGroup]="form" (ngSubmit)="onSubmit()">
+            <mat-error *ngIf="!codeIsValid">
+                The verification code is not valid
+              </mat-error>
             <mat-form-field class="verify-form-field">
                 <mat-label>eToken Code</mat-label>
                 <input matInput placeholder="907281" formControlName="verifyCode" required>
