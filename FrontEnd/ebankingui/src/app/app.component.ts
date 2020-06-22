@@ -11,16 +11,12 @@ export class AppComponent implements OnInit{
   isAuthenticated: boolean;
 
   constructor(public authService: AccountService) {
-    this.authService.isAuthenticated.subscribe(
-      (isAuthenticated: boolean)  => this.isAuthenticated = isAuthenticated
-    );
   }
 
   async ngOnInit() {
-    this.isAuthenticated = await this.authService.checkAuthenticated();
   }
 
   logout() {
-    this.authService.logout('/');
+   
   }
 }

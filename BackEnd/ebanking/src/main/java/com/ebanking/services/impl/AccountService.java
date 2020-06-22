@@ -20,8 +20,10 @@ import com.ebanking.dto.AccountResponseDTO;
 import com.ebanking.dto.CMNDDTO;
 import com.ebanking.dto.JsonMessageDTO;
 import com.ebanking.entities.Account;
+import com.ebanking.helper.Mailer;
 import com.ebanking.repositories.AccountRepository;
 import com.ebanking.services.IAccountService;
+import com.ebanking.util.CommonUtil;
 
 @Component
 @Transactional
@@ -32,6 +34,9 @@ public class AccountService implements IAccountService, UserDetailsService  {
 
 	@Autowired
 	private AccountRepository accountRepository;
+	
+	@Autowired
+	private Mailer mailer;
 
 	private Logger logger = LoggerFactory.getLogger(AccountService.class);
 
@@ -119,8 +124,19 @@ public class AccountService implements IAccountService, UserDetailsService  {
 
 	@Override
 	public JsonMessageDTO forgotPassword(AccountRequestDTO request) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Account user = accountRepository.findById(request.getUsername()).get();
+		JsonMessageDTO response = new JsonMessageDTO();
+		if(user == null) {
+			response.setStatusRequest(false);
+			response.setMessageStatus(COMMON_MESSAGE_FAIL);
+		}
+		String verifyCode = CommonUtil.randomStrongPassword(6, false, true);
+		mailer.send(user.getEmail(),"[EBanking] - Send Verification Code", "Verification Code:  " + verifyCode);
+		response.setStatusRequest(true);
+		response.setMessageStatus(COMMON_MESSAGE_SUCCESS);
+		response.setJsonResponse(verifyCode);
+		return response;
 	}
+	
 
 }

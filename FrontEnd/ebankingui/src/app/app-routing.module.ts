@@ -11,6 +11,7 @@ import { ConfirmationComponent } from './component/card/confirmation/confirmatio
 import { VerificationComponent } from './component/card/verification/verification.component';
 import { OverviewComponent } from './component/card/overview/overview.component';
 import { UpdatepasswordComponent } from './component/account/updatepassword/updatepassword.component';
+import { BasicrequestGuard } from './guard/basicrequest.guard';
 
 
 const routes: Routes = [
@@ -25,47 +26,47 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'transfer',
     component: TransferComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard]
   },
   {
     path: 'history',
     component: TransactionHistoryComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'account_infor',
     component: AccountinfoComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'card_detail',
     component: CardinfoComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'confirmation',
     component: ConfirmationComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'verification',
     component: VerificationComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'summary',
     component: OverviewComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService,BasicrequestGuard ]
   },
   {
     path: 'change_password',
     component: UpdatepasswordComponent,
-    canActivate: [ AuthGuardService ]
+    canActivate: [ AuthGuardService ,BasicrequestGuard]
   },
 ];;
 

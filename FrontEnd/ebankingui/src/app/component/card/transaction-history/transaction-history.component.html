@@ -1,6 +1,6 @@
 <div class="uk-container">
     <ul class="uk-breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a (click)="backHome()">Home</a></li>
         <li><span>Transaction History</span></li>
     </ul>
     <h3 style="color: #42236a;font-weight: bold;">Transaction History</h3>
@@ -9,9 +9,9 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-body">
                     <p class="eb-account-info-title">Account Number</p>
-                    <p class="eb-account-info-subtitle">0236 0148 101</p>
+                    <p class="eb-account-info-subtitle">{{card.cardNumber}}</p>
                     <p class="eb-account-info-title">Available Balance</p>
-                    <p class="eb-account-info-balance">20,636,607 VND</p>
+                    <p class="eb-account-info-balance">{{card.availableBalance}}</p>
                 </div>
             </div>
         </div>
@@ -22,7 +22,26 @@
                         <li>
                             <a class="uk-accordion-title" style="color: #42236a;" href="#">Search</a>
                             <div class="uk-accordion-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <div class="uk-text-center">
+                                    <form class="history-form">
+                                        <mat-form-field>
+                                            <mat-label>From</mat-label>
+                                            <input matInput [matDatepicker]="pickerFrom">
+                                            <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerFrom></mat-datepicker>
+                                          </mat-form-field>
+                                          
+                                          <mat-form-field>
+                                            <mat-label>To</mat-label>
+                                            <input matInput [matDatepicker]="pickerTo">
+                                            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                                            <mat-datepicker #pickerTo color="primary"></mat-datepicker>
+                                          </mat-form-field>
+                                    </form>
+                                </div>
+                                <div class="uk-margin-top uk-text-center">
+                                    <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;" (click)="onClickSearch()">Search</button>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -32,18 +51,18 @@
                 <perfect-scrollbar [perfectScrollbar]="config" [scrollIndicators]="true" class="scroll-container ps-show-active">
                 <div class="scroll-container ">
                     <ul class="uk-list uk-list-divider">
-                        <li>
+                        <li *ngFor="let item of transactionHistories">
                             <div>
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="width: 50px">
                                             <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">19</span>
+                                                <span style="font-size:25px;">{{item.day}}</span>
                                             </div>
                                         </td>
                                         <td style="vertical-align: middle;">
-                                            <div class="eb-account-info-title">Friday</div>
-                                            <div class="eb-account-info-title">June 2020</div>
+                                            <div class="eb-account-info-title">{{item.dayOfWeek}}</div>
+                                            <div class="eb-account-info-title">{{item.month}} {{item.year}}</div>
                                         </td>
                                     </tr>
                                 </table>
@@ -53,130 +72,10 @@
                                 <table style="width: 100%">
                                     <tr>
                                         <td style="vertical-align: middle;color: #42236a;" class="uk-table-expand">
-                                            <span>Deposit money at live bank</span>
+                                            <span>{{item.transactionDescription}}</span>
                                         </td>
                                         <td style="vertical-align: middle;text-align: right;color: #64dd17;" class="uk-width-small">
-                                            <span>+ 4,000,000 VND</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 50px">
-                                            <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">19</span>
-                                            </div>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <div class="eb-account-info-title">Friday</div>
-                                            <div class="eb-account-info-title">June 2020</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                           
-                            <div class="uk-margin-top">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="vertical-align: middle;color: #42236a;" class="uk-table-expand">
-                                            <span>Deposit money at live bank</span>
-                                        </td>
-                                        <td style="vertical-align: middle;text-align: right;color: #64dd17;" class="uk-width-small">
-                                            <span>+ 4,000,000 VND</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 50px">
-                                            <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">19</span>
-                                            </div>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <div class="eb-account-info-title">Friday</div>
-                                            <div class="eb-account-info-title">June 2020</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                           
-                            <div class="uk-margin-top">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="vertical-align: middle;color: #42236a;" class="uk-table-expand">
-                                            <span>Deposit money at live bank</span>
-                                        </td>
-                                        <td style="vertical-align: middle;text-align: right;color: #64dd17;" class="uk-width-small">
-                                            <span>+ 4,000,000 VND</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 50px">
-                                            <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">19</span>
-                                            </div>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <div class="eb-account-info-title">Friday</div>
-                                            <div class="eb-account-info-title">June 2020</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                           
-                            <div class="uk-margin-top">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="vertical-align: middle;color: #42236a;" class="uk-table-expand">
-                                            <span>Deposit money at live bank</span>
-                                        </td>
-                                        <td style="vertical-align: middle;text-align: right;color: #64dd17;" class="uk-width-small">
-                                            <span>+ 4,000,000 VND</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="width: 50px">
-                                            <div style="background-color: #ebebfa; color: #42236a;padding: 7px;border-radius: 3px;">
-                                                <span style="font-size:25px;">19</span>
-                                            </div>
-                                        </td>
-                                        <td style="vertical-align: middle;">
-                                            <div class="eb-account-info-title">Friday</div>
-                                            <div class="eb-account-info-title">June 2020</div>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                           
-                            <div class="uk-margin-top">
-                                <table style="width: 100%">
-                                    <tr>
-                                        <td style="vertical-align: middle;color: #42236a;" class="uk-table-expand">
-                                            <span>Deposit money at live bank</span>
-                                        </td>
-                                        <td style="vertical-align: middle;text-align: right;color: #64dd17;" class="uk-width-small">
-                                            <span>+ 4,000,000 VND</span>
+                                            <span>{{item.amount}} VND</span>
                                         </td>
                                     </tr>
                                 </table>

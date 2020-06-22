@@ -7,17 +7,19 @@
     
     <span>Ebanking</span>
     <span class="menu-spacer"></span>
-    <div fxShow="true" fxHide.lt-md style="width: 100%;text-align: right;">
+    <div fxShow="true" fxHide.lt-md style="width: 100%;text-align: right;" >
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <button mat-button [matMenuTriggerFor]="menu"><mat-icon style="color: #f58220;">notifications</mat-icon></button>
-        <button mat-button [matMenuTriggerFor]="menu">PHAM HUNG <mat-icon>expand_more</mat-icon></button>
-        <mat-menu #menu="matMenu">
-           
-            <button mat-menu-item  (click)="onClick('account_infor')"><mat-icon style="color: #42a5f5;" >account_box</mat-icon> Account Information</button>
-            <button mat-menu-item  (click)="onClick('change_password')"><mat-icon style="color: #ffeb3b;">security</mat-icon> Change Password</button>
-            <button mat-menu-item  (click)="onClick('contact_support')"><mat-icon style="color: #4caf50;">contact_support</mat-icon> Contact Support</button>
-            <button mat-menu-item  (click)="onClick('logout')"><mat-icon style="color: #f44336;">power_settings_new</mat-icon> Exit</button>
-        </mat-menu>
+        <div *ngIf="isLogined && accountResponseDTO">
+          <button mat-button [matMenuTriggerFor]="menu"><mat-icon style="color: #f58220;">notifications</mat-icon></button>
+          <button mat-button [matMenuTriggerFor]="menu" >{{accountResponseDTO.lastName}} {{accountResponseDTO.firstName}}<mat-icon>expand_more</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            
+              <button mat-menu-item  (click)="onClick('account_infor')"><mat-icon style="color: #42a5f5;" >account_box</mat-icon> Account Information</button>
+              <button mat-menu-item  (click)="onClick('change_password')"><mat-icon style="color: #ffeb3b;">security</mat-icon> Change Password</button>
+              <button mat-menu-item  (click)="onClick('contact_support')"><mat-icon style="color: #4caf50;">contact_support</mat-icon> Contact Support</button>
+              <button mat-menu-item  (click)="onClickLogout()"><mat-icon style="color: #f44336;">power_settings_new</mat-icon> Exit</button>
+          </mat-menu>
+        </div>
     </div>
     </mat-toolbar-row>
 </mat-toolbar>
@@ -28,7 +30,7 @@
         <a  (click)="onClick('account_infor')" mat-list-item><mat-icon style="color: #42a5f5;">account_box</mat-icon> Account Information</a>
         <a  (click)="onClick('change_password')"mat-list-item><mat-icon style="color: #ffeb3b;">security</mat-icon> Change Password</a>
         <a  (click)="onClick('contact_support')" mat-list-item><mat-icon style="color: #4caf50;">contact_support</mat-icon> Contact Support</a>
-        <a h (click)="onClick('logout')" mat-list-item><mat-icon style="color: #f44336;">power_settings_new</mat-icon> Exit</a>
+        <a (click)="onClickLogout()" mat-list-item><mat-icon style="color: #f44336;">power_settings_new</mat-icon> Exit</a>
       </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content fxFlexFill class="main-container">

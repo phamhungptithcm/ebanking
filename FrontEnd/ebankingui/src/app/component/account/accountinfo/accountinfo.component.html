@@ -1,6 +1,6 @@
 <div class="uk-container">
     <ul class="uk-breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a (click)="backHome()">Home</a></li>
         <li><span>Account Information</span></li>
     </ul>
     <h3 style="color: #42236a;font-weight: bold;">Account Information</h3>
@@ -9,7 +9,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">UserName</p>
-                    <p  class="eb-account-info-subtitle">02371721</p>
+                    <p  class="eb-account-info-subtitle">{{accountResponseDTO.accountId}}</p>
                 </div>
             </div>
         </div>
@@ -18,12 +18,12 @@
                 <div class="uk-column-1-2@m uk-column-divider">
                     <div>
                         <p class="eb-account-info-title">Place of Issue</p>
-                        <p class="eb-account-info-subtitle">CCS QLHC VA TTXH</p>
+                        <p class="eb-account-info-subtitle">{{accountResponseDTO.cmndDTO.placeGranted}}</p>
                     </div>
                 
                     <div>
                         <p class="eb-account-info-title">Date of Issue</p>
-                        <p class="eb-account-info-subtitle">20/03/2019</p>
+                        <p class="eb-account-info-subtitle">{{accountResponseDTO.cmndDTO.dateGranted}}</p>
                     </div>
 
                 </div>
@@ -35,7 +35,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">Fullname</p>
-                    <p class="eb-account-info-subtitle">PHAM HUNG</p>
+                    <p class="eb-account-info-subtitle">{{accountResponseDTO.lastName}} {{accountResponseDTO.firstName}}</p>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">Address <span style="float: right;color: #f58220;" class="fa fa-pencil-square" aria-hidden="true" uk-tooltip="Edit"></span></p>
-                    <p class="eb-account-info-subtitle">97,Man Thien, Hiep Phu, Quan 9, HCM</p>
+                    <p class="eb-account-info-subtitle">{{accountResponseDTO.address}}</p>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">Phone Number</p>
-                    <p class="eb-account-info-subtitle">036 3365 053</p>
+                    <p class="eb-account-info-subtitle">{{accountResponseDTO.phoneNum}}</p>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">Email <span style="float: right;color: #f58220;" class="fa fa-pencil-square" aria-hidden="true" uk-tooltip="Edit"></span></p>
-                    <p class="eb-account-info-subtitle">phamhung.pitit@gmail.com</p>
+                    <p class="eb-account-info-subtitle">{{accountResponseDTO.email}}</p>
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1 uk-column-divider">
                     <p class="eb-account-info-title">Id Number/ Passport/ CCCD Card</p>
-                    <p class="eb-account-info-subtitle">043762172672</p>
+                    <p class="eb-account-info-subtitle">{{accountResponseDTO.cmndDTO.id}}</p>
                 </div>
             </div>
         </div>

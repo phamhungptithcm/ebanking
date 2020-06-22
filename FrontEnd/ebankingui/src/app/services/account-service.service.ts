@@ -1,48 +1,82 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
-import OktaAuth from '@okta/okta-auth-js';
+import { tap, catchError, window } from 'rxjs/operators';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { WebServicesURL } from '../component/shared/WebServicesURL';
+import { ForgotPasswordRequestDTO } from '../dtos/ForgotPasswordRequestDTO';
+import { LoginRequestDTO } from '../dtos/LoginRequestDTO';
+import { JsonMessageResponseDTO } from '../dtos/JsonMessageResponseDTO';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
-
-  constructor(private router: Router) { }
-  
-  private authClient = new OktaAuth({
-    issuer: 'https://dev-133320.okta.com/oauth2/default',
-    clientId: '0oab4example4Jbi0h7'
-  });
+export class AccountService extends WebServicesURL{
 
   public isAuthenticated = new BehaviorSubject<boolean>(false);
-  // public isAuthenticated = new BehaviorSubject<boolean>(true);
 
-  async checkAuthenticated() {
-    // const authenticated = await this.authClient.session.exists();
-    // this.isAuthenticated.next(authenticated);
-    // return authenticated;
-    return true;
+  constructor(private router: Router, private http: HttpClient) { 
+    super();
   }
+  
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Basic ' + btoa('ebanking:1')
+    })
+  };  
+  private httpOptionsUser = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' })
+  };
 
-  async login(username: string, password: string) {
-    // const transaction = await this.authClient.signIn({username, password});
-
-    // if (transaction.status !== 'SUCCESS') {
-    //   throw Error('We cannot handle the ' + transaction.status + ' status');
-    // }
-    // this.isAuthenticated.next(true);
-
-    // this.authClient.session.setCookieAndRedirect(transaction.sessionToken);
+  forgot(request: ForgotPasswordRequestDTO): Observable<any>{
+    const url =`${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.FORGOT_PASSWORD_ACTION_PATH}`;
+    return this.http.post(url, JSON.stringify(request), this.httpOptionsUser).pipe(
+      tap(),
+      catchError(error => of(new ForgotPasswordRequestDTO()))
+    );
   }
-
-  async logout(redirect: string) {
-    try {
-      await this.authClient.signOut();
-      this.isAuthenticated.next(false);
-      this.router.navigate([redirect]);
-    } catch (err) {
-      console.error(err);
-    }
+  saveToken(tokenName: string, tokenValue: string) {
+    localStorage.setItem(tokenName, tokenValue);
   }
+  getToken(tokenName: string) {
+    return localStorage.getItem(tokenName);
+  }
+  removeToken(){
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_in');
+    localStorage.removeItem('refresh_token');
+    sessionStorage.removeItem('user');
+  }
+  isLogged() {
+    return this.getToken('access_token') !== null;
+  }
+  loginBody(request: LoginRequestDTO): Observable<any> {
+    let body = new URLSearchParams;
+    body.set('username', request.username);
+    body.set('password', request.password);
+    body.set('grant_type', 'password');
+    return this.http.post(this.OAUTH_TOKEN_URL, body.toString(), this.httpOptions);
+  }
+  loginUser(request: LoginRequestDTO): Observable<any> {
+    const url = `${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.LOGIN_ACTION_PATH}`;
+    return this.http.post(url, JSON.stringify(request), this.httpOptionsUser).pipe(
+      tap(),
+      catchError(error => of(null))
+    );
+  }
+  logout() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expires_in');
+    localStorage.removeItem('refresh_token');
+    sessionStorage.removeItem('user');
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
+    location.reload();
+  }
+  async getAccountInfo(request: LoginRequestDTO): Promise<any>  {
+    const url = `${this.DOMAIN}/${this.ACCOUNT_SERVICE_CONTEXT_PATH}/${this.GET_ACCOUNT_INFO_ACTION_PATH}?${this.TOKEN_PARAM}`;
+    return await this.http.post<JsonMessageResponseDTO>(url, request, this.httpOptionsUser).toPromise();
+  }
+  
 }

@@ -1,6 +1,6 @@
 <div class="uk-container">
     <ul class="uk-breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a (click)="backHome()">Home</a></li>
         <li><span>Card Information</span></li>
     </ul>
     <h3 style="color: #42236a;font-weight: bold;">Account Information</h3>
@@ -9,9 +9,9 @@
             <div class="uk-card uk-card-default uk-card-body">
                 <div class="uk-column-1-1">
                     <p class="eb-account-info-title">Balance</p>
-                    <p class="eb-account-info-subtitle">20,636,607 VND</p>
+                    <p class="eb-account-info-subtitle">{{card.balance}} VND</p>
                     <p class="eb-account-info-title">Available Balance</p>
-                    <p class="eb-account-info-subtitle">20,636,607 VND</p>
+                    <p class="eb-account-info-subtitle">{{card.availableBalance}} VND</p>
                 </div>
             </div>
         </div>
@@ -25,31 +25,31 @@
                     
                         <div>
                             <p class="eb-account-info-title">Account Number</p>
-                            <p class="eb-account-info-subtitle">0236 0148 101</p>
+                            <p class="eb-account-info-subtitle">{{card.cardNumber}}</p>
                         </div>
     
                     </div>
                     <div class="uk-column-1-2@m uk-column-divider">
                         <div>
                             <p class="eb-account-info-title">Issue Date</p>
-                            <p class="eb-account-info-subtitle">05/10/2018</p>
+                            <p class="eb-account-info-subtitle">{{card.issueDate}}</p>
                         </div>
                     
                         <div>
                             <p class="eb-account-info-title">Branch</p>
-                            <p class="eb-account-info-subtitle">TPBANK CONG HOA</p>
+                            <p class="eb-account-info-subtitle">{{card.branchDTO.branchName}}</p>
                         </div>
     
                     </div>
                     <div class="uk-column-1-2@m uk-column-divider">
                         <div>
                             <p class="eb-account-info-title">Overdraft Interest Rate</p>
-                            <p class="eb-account-info-subtitle">0.1% / year</p>
+                            <p class="eb-account-info-subtitle">{{card.overdraftTinterRestrate}}</p>
                         </div>
                     
                         <div>
                             <p class="eb-account-info-title">Overdraft Limit</p>
-                            <p class="eb-account-info-subtitle">35,000,000 VND</p>
+                            <p class="eb-account-info-subtitle">{{card.overdraftLimit}}</p>
                         </div>
     
                     </div>

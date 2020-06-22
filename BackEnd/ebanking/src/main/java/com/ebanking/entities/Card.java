@@ -50,7 +50,7 @@ public class Card {
 	private Branch branch;
 	
 	@OneToMany(mappedBy = "card")
-	private List<Transaction> transactions;
+	private List<TransactionHistory> transactions;
 
 	public String getAccountNumber() {
 		return accountNumber;
@@ -124,11 +124,11 @@ public class Card {
 		this.branch = branch;
 	}
 
-	public List<Transaction> getTransactions() {
+	public List<TransactionHistory> getTransactions() {
 		return transactions;
 	}
 
-	public void setTransactions(List<Transaction> transactions) {
+	public void setTransactions(List<TransactionHistory> transactions) {
 		this.transactions = transactions;
 	}
 	

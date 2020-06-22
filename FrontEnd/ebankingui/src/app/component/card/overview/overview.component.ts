@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TransferRequestDTO } from 'src/app/dtos/TransferRequestDTO';
 
 @Component({
   selector: 'app-overview',
@@ -9,8 +10,9 @@ import { Router } from '@angular/router';
 export class OverviewComponent implements OnInit {
 
   constructor(private router: Router) { }
-
+  summaryDTO: TransferRequestDTO;
   ngOnInit() {
+    this.summaryDTO = JSON.parse(sessionStorage.getItem('summaryDTO'));
   }
   onClick(action) {
     this.router.navigate([action]);

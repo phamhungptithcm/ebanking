@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TRANSACTION")
-public class Transaction {
+@Table(name = "TRANSACTIONHISTORY")
+public class TransactionHistory {
 	
 	@Id
 	@Column(name ="TRANSACTION_ID")
@@ -39,7 +39,7 @@ public class Transaction {
 	@Column(name ="TRANSACTION_AMOUT")
 	private Double transactionAmount;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="CARD_ID")
 	private Card card;
 

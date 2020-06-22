@@ -1,55 +1,61 @@
 <div class="uk-container">
     <ul class="uk-breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a (click)="backHome()">Home</a></li>
         <li><span>Money Transfer</span></li>
     </ul>
     <h3 style="color: #42236a;font-weight: bold;">Money Transfer In TPBank</h3>
     <div class="uk-container uk-container-small uk-margin-top">
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="center: true">
-            <ul class="uk-slider-items uk-grid">
-                <li class="uk-width-3-4">
-                    <div class="uk-panel">
-                        <div class="uk-card uk-card-default uk-card-body" style="color: #42236a;">
-                            <div><span>PHAM HUNG</span></div>
-                            <div><span>0236 0148 101</span></div>
-                            <div style="width: 100%">
-                                <span>20,036,607 VND </span><span class="fa fa-eye-slash" aria-hidden="true" style="color: #f58220;"></span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slider-item="previous" style="color: #f58220;"></a>
-            <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slider-item="next" style="color: #f58220;"></a>
-
+        <div>
+            <div class="uk-card uk-card-default uk-card-body" style="color: #42236a;">
+                <div><span class="eb-account-info-subtitle">{{card.fullname}}</span></div>
+                <div><span class="eb-account-info-title">{{card.cardNumber}}</span></div>
+                <div style="width: 100%">
+                    <span class="eb-account-info-subtitle">{{card.balance}} VND </span><span class="fa fa-eye-slash" aria-hidden="true" style="color: #f58220;"></span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="uk-child-width-1-1 uk-margin-top" uk-grid>
         <div>
             <div class="uk-card uk-card-default uk-card-body">
-                <form class="transfer-form">
+                <form class="transfer-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <mat-error *ngIf="transferInvalid">
+                        The account number were not recognised
+                    </mat-error>
                     <mat-form-field class="transfer-form-field">
-                        <mat-label>Account Number</mat-label>
-                        <input matInput placeholder="0212 1281 101" >
+                        <mat-label>Card Number</mat-label>
+                        <input (change)="verifyCardNumber()" matInput placeholder="0212 1281 101" formControlName="cardNumber" required>
+                        <mat-error>
+                            Please provide a valid account number
+                        </mat-error>
                       </mat-form-field>
+                    <mat-form-field class="transfer-form-field" *ngIf="cardTo">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput  formControlName="fullname" value="{{cardTo.fullname}}" disabled>
+                    </mat-form-field>
+                    <mat-form-field class="transfer-form-field" *ngIf="cardTo">
+                        <mat-label>Branch</mat-label>
+                        <input matInput  formControlName="branch" value="{{cardTo.branchDTO.branchName}}" disabled>
+                    </mat-form-field>
                       <mat-form-field class="transfer-form-field">
                         <mat-label>Amount</mat-label>
-                        <input matInput placeholder="200 000" >
+                        <input matInput placeholder="200 000" formControlName="amount" required>
+                        <mat-error>
+                            Please provide a valid amount
+                        </mat-error>
                       </mat-form-field>
                     <mat-form-field class="transfer-form-field">
                         <mat-label>Content of Money Transfer</mat-label>
-                        <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+                        <textarea matInput placeholder="Ex. It makes me feel..." formControlName="message" required></textarea>
+                        <mat-error>
+                            Please provide a message
+                        </mat-error>
                       </mat-form-field>
+                       <div class="uk-margin-top uk-text-center">
+                            <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;">Continue</button>
+                        </div>
                   </form>
             </div>
-            <div class="uk-text-right uk-margin-top">
-                <mat-slide-toggle>Save Transfer Information</mat-slide-toggle>
-            </div>
-            
         </div>
-    </div>
-    <div class="uk-margin-top uk-text-center">
-        <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;" (click)="onClick()">Continue</button>
     </div>
 </div>

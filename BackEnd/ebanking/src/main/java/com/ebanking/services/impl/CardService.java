@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,15 @@ import com.ebanking.dto.OTPRequestDTO;
 import com.ebanking.dto.TransactionHistoryResponseDTO;
 import com.ebanking.dto.TransactionRequestDTO;
 import com.ebanking.dto.TransferDTO;
+import com.ebanking.entities.Account;
 import com.ebanking.entities.Branch;
 import com.ebanking.entities.Card;
-import com.ebanking.entities.Transaction;
+import com.ebanking.entities.TransactionHistory;
+import com.ebanking.helper.Mailer;
 import com.ebanking.repositories.CardRepository;
 import com.ebanking.repositories.TransactionRepository;
 import com.ebanking.services.ICardService;
+import com.ebanking.util.CommonUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
@@ -35,6 +39,9 @@ public class CardService implements ICardService {
 
 	@Autowired
 	private TransactionRepository transactionRepository;
+	
+	@Autowired
+	private Mailer mailer;
 
 	private Logger logger = LoggerFactory.getLogger(CardService.class);
 
@@ -82,7 +89,7 @@ public class CardService implements ICardService {
 	public JsonMessageDTO getTransactionHistory(TransactionRequestDTO request) throws Exception {
 		JsonMessageDTO response = new JsonMessageDTO();
 		try {
-			Transaction transaction = transactionRepository
+			TransactionHistory transaction = transactionRepository
 					.findByCardAccountNumberOrderByTransactionDateDesc(request.getCardNumber());
 			if (transaction != null) {
 				TransactionHistoryResponseDTO historyDTO = new TransactionHistoryResponseDTO();
@@ -113,7 +120,7 @@ public class CardService implements ICardService {
 			Card receiver = cardRepository.findById(request.getCardNumberReceiver()).get();
 			Card transfer = cardRepository.findById(request.getCardNumberTransfer()).get();
 			if (receiver != null && transfer != null) {
-				Transaction transaction = new Transaction();
+				TransactionHistory transaction = new TransactionHistory();
 				transaction.setCard(transfer);
 				transaction.setCardFrom(transfer.getAccountNumber());
 				transaction.setCardTo(receiver.getAccountNumber());
@@ -140,16 +147,24 @@ public class CardService implements ICardService {
 				transferDTO.setMessage(request.getMessage());
 
 				if (request.getTransferAmount() < transfer.getBalance()) {
+					receiver.setBalance(receiver.getBalance() + request.getTransferAmount());
+					receiver.setAvailableBalance(receiver.getBalance() + request.getTransferAmount());
+					transfer.setBalance(transfer.getAvailableBalance() - request.getTransferAmount());
+					transfer.setAvailableBalance(transfer.getAvailableBalance() - request.getTransferAmount());
+					cardRepository.save(receiver);
+					cardRepository.save(transfer);
 					transaction.setTransactionStatus(true);
-
+					transaction.setTransactionDescription("Successfully");
 					response.setStatusRequest(true);
 					response.setMessageStatus("Success");
+					transferDTO.setStatus(true);
 					response.setJsonResponse(transferDTO);
 				} else {
 					response.setStatusRequest(false);
+					transferDTO.setStatus(false);
 					response.setMessageStatus("Balance in the account is not enough");
 					response.setJsonResponse(transferDTO);
-
+						
 					transaction.setTransactionDescription("Account Balance is not enough.");
 					transaction.setTransactionStatus(false);
 
@@ -216,8 +231,17 @@ public class CardService implements ICardService {
 
 	@Override
 	public JsonMessageDTO sendMail(OTPRequestDTO request) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		JsonMessageDTO response = new JsonMessageDTO();
+		if(!StringUtils.isNotBlank(request.getEmail())) {
+			response.setStatusRequest(false);
+			response.setMessageStatus("Failure");
+		}
+		String verifyCode = CommonUtil.randomStrongPassword(6, false, true);
+		mailer.send(request.getEmail(),"[EBanking] - Send Verification Code", "Verification Code:  " + verifyCode);
+		response.setStatusRequest(true);
+		response.setMessageStatus("Successfully");
+		response.setJsonResponse(verifyCode);
+		return response;
 	}
 
 	@Override
@@ -228,8 +252,11 @@ public class CardService implements ICardService {
 
 	@Override
 	public JsonMessageDTO verifyCode(OTPRequestDTO request) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		JsonMessageDTO response = new JsonMessageDTO();
+		response.setStatusRequest(true);
+		response.setMessageStatus("Successfully");
+		response.setJsonResponse(true);
+		return response;
 	}
 
 }

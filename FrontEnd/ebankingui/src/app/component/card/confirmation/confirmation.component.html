@@ -2,30 +2,29 @@
 <div class="uk-container">
     <a><span class="fa fa-angle-left" style="color: #f58220;" aria-hidden="true"></span> <span style="color: #42236a;"> Back</span></a>
     <h3 style="color: #42236a;font-weight: bold;">Money Transfer In TPBank</h3>
-
     <div class="uk-card uk-card-default uk-card-body uk-margin-top">
         <div class="uk-column-1-2@m uk-column-divider">
             <div>
                 <div class="eb-account-info-title">Transaction Amount</div>
-                <div class="eb-account-info-subtitle">10,000 VND</div>
+                <div class="eb-account-info-subtitle">{{transferDTO.transferAmount}} VND</div>
             </div>
         
             <div>
                 <div class="eb-account-info-title">Message</div>
-                <div class="eb-account-info-subtitle">I did</div>
+                <div class="eb-account-info-subtitle">{{transferDTO.message}}</div>
             </div>
         </div>
     </div>
 
     <div class="uk-card uk-card-default uk-card-body uk-margin-top">
         <div class="eb-account-info-title">From</div>
-        <div class="eb-account-info-subtitle">PHAM HUNG</div>
-        <div class="eb-account-info-subtitle">0283 1029 101</div>
+        <div class="eb-account-info-subtitle">{{transferDTO.nameTransfer}}</div>
+        <div class="eb-account-info-subtitle">{{transferDTO.cardNumberReceiver}}</div>
     </div>
     <div class="uk-card uk-card-default uk-card-body uk-margin-top">
         <div class="eb-account-info-title">To</div>
-        <div class="eb-account-info-subtitle">NGUYEN VAN DINH</div>
-        <div class="eb-account-info-subtitle">0289 1021 101</div>
+        <div class="eb-account-info-subtitle">{{transferDTO.nameReceiver}}</div>
+        <div class="eb-account-info-subtitle">{{transferDTO.cardNumberTransfer}}</div>
     </div>
     <div class="uk-margin-top uk-text-center container-button-row">
         <button mat-raised-button style="background-color: #e2d8ee; width: 250px;color: #42236a;" (click)="onClick('transfer')">Cancel</button>

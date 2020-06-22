@@ -6,6 +6,7 @@
 .eb-account-info-subtitle{
     color: #42236a;
     font-size: 18px;
+    font-size: bold;
 }
 .eb-account-info-balance{
     color: #42236a;
@@ -20,4 +21,7 @@
   
     overflow: auto;
     max-height: 600px;
-  }  
+  } 
+  mat-form-field {
+    margin-right: 12px;
+  }

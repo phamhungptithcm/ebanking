@@ -5,17 +5,18 @@
     <div class="uk-text-center uk-margin-top">
         <h3 style="color: #42236a;font-weight: bold;">Enter The eToken Code</h3>
         <div class="eb-account-info-title">Please enter the OTP code sent via your phone here.</div>
-        <form class="verify-form uk-margin-top">
+        <form class="verify-form uk-margin-top"  [formGroup]="form" (ngSubmit)="onSubmit()">
             <mat-form-field class="verify-form-field">
                 <mat-label>eToken Code</mat-label>
-                <input matInput placeholder="907281" >
+                <input matInput placeholder="907281" formControlName="verifyCode" required>
             </mat-form-field>
-         </form>
-         <div class="uk-text-center uk-margin-top">
-             <span>If you haven't received OTP Code? </span><a style="color: #f58220;"><span class="fa fa-repeat" aria-hidden="true"></span><span> Resend.</span></a>
-         </div>
-         <div class="uk-text-center uk-margin-top">
-            <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;" (click)="onClick()">Verify</button>
-        </div>
+         
+            <div class="uk-text-center uk-margin-top">
+                <span>If you haven't received OTP Code? </span><a style="color: #f58220;"><span class="fa fa-repeat" aria-hidden="true" (click)="resendMail()"></span><span> Resend.</span></a>
+            </div>
+            <div class="uk-text-center uk-margin-top">
+                <button mat-raised-button style="background-color: #7b35bb; width: 250px; color: #f58220;">Verify</button>
+            </div>
+        </form>
     </div>
 </div>

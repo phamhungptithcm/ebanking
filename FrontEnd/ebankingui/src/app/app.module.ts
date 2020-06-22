@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +26,8 @@ import { MatToolbarModule,
   MatListModule,
   MatSelectModule,
   MatSidenavModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   MatOptionModule} from '@angular/material';
 import { MenubarComponent } from './component/shared/menubar/menubar.component';
 import { FooterComponent } from './component/shared/footer/footer.component';
@@ -35,11 +38,12 @@ import { ConfirmationComponent } from './component/card/confirmation/confirmatio
 import { VerificationComponent } from './component/card/verification/verification.component';
 import { OverviewComponent } from './component/card/overview/overview.component';
 import { UpdatepasswordComponent } from './component/account/updatepassword/updatepassword.component';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true
 };
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     LoginComponent,
@@ -72,11 +76,14 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MatButtonModule,
     MatTableModule,
     MatDividerModule,
+    MatDatepickerModule,
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
     MatProgressSpinnerModule ,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    HttpClientModule,
+    MatNativeDateModule
   ],
   providers: [
     {

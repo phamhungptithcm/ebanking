@@ -4,35 +4,38 @@
     <div class="uk-margin-top" uk-grid>
         <div class="uk-width-1-3@m uk-text-center uk-margin-top">
             <div>
-               <div><span class="fa fa-check-circle-o fa-5x" style="color: #64dd17;" aria-hidden="true"></span></div>
+               <div>
+                   <span class="fa fa-check-circle-o fa-5x" style="color: #64dd17;" aria-hidden="true" *ngIf="summaryDTO.status"></span>
+                   <span class="fa fa-times-circle-o fa-5x" style="color: #f44336;" aria-hidden="true" *ngIf="!summaryDTO.status"></span>
+                </div>
                <h3 style="color: #42236a;font-weight: bold;">Successful Transaction</h3>
                <div class="eb-account-info-title">YOU HAVE SUCCESSFULLY SUBMITTED</div>
-               <div class="eb-account-info-subtitle" style="font-size: 30px">10,000 VND</div>
+               <div class="eb-account-info-subtitle" style="font-size: 30px">{{summaryDTO.transferAmount}} VND</div>
                <a style="color: #f58220;"><span class="fa fa-envelope" aria-hidden="true"></span> Send to my mail</a>
             </div>
         </div>
         <div class="uk-width-expand@m">
             <div class="uk-card uk-card-default uk-card-body uk-margin-top">
                 <div class="eb-account-info-title">From</div>
-                <div class="eb-account-info-subtitle">PHAM HUNG</div>
-                <div class="eb-account-info-subtitle">0283 1029 101</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.nameTransfer}}</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.cardNumberTransfer}}</div>
             </div>
             <div class="uk-card uk-card-default uk-card-body uk-margin-top">
                 <div class="eb-account-info-title">To</div>
-                <div class="eb-account-info-subtitle">NGUYEN VAN DINH</div>
-                <div class="eb-account-info-subtitle">0289 1021 101</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.nameReceiver}}</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.cardNumberReceiver}}</div>
             </div>
             <div class="uk-card uk-card-default uk-card-body uk-margin-top">
                 <div class="eb-account-info-title">Transaction Date</div>
-                <div class="eb-account-info-subtitle">23:21:02 Saturday, 21/6/2020</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.transactionDate}}</div>
             </div>
             <div class="uk-card uk-card-default uk-card-body uk-margin-top">
                 <div class="eb-account-info-title">Message</div>
-                <div class="eb-account-info-subtitle">I did</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.message}}</div>
             </div>
             <div class="uk-card uk-card-default uk-card-body uk-margin-top">
                 <div class="eb-account-info-title">Transaction Code</div>
-                <div class="eb-account-info-subtitle">203CTDGA45TD</div>
+                <div class="eb-account-info-subtitle">{{summaryDTO.transactionId}}</div>
             </div>
             <div class="uk-margin-top uk-text-center container-button-row">
                 <button mat-raised-button style="background-color: #e2d8ee; width: 250px;color: #42236a;" (click)="onClick('transfer')">New Transaction</button>
